@@ -128,19 +128,23 @@ def graph_polar(axislist, ifNotDB, title, ifSqrt):
 if __name__ == '__main__':
     # 7-71, because in the rest of measurement antenna is not moving
     data_E = txt_to_axislists('anntena_measurements/LAB2_E.TXT', 7, 71)
-    # graph(data_E, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
-    # graph_polar(data_E, True, "Zależność mocy od kąta", False)
+    graph(data_E, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
+    graph_polar(data_E, True, "Zależność mocy od kąta", False)
 
-    # graph_polar(data_E, False, "Zależność skali decybelowej natężenia pola", True)
-    #
-    # graph_polar(data_E, True, "Zależność w skali liniowej natężenia pola", True)
+    graph_polar(data_E, False, "Zależność w skali decybelowej natężenia pola", True)
+    graph(data_E, 'kąt [°]', '', False, 'Zależność w skali decybelowej natężenia pola', True)
+
+    graph_polar(data_E, True, "Zależność w skali liniowej natężenia pola", True)
+    graph(data_E, 'kąt [°]', '', True, 'Zależność w skali liniowej natężenia pola', True)
 
 
 
     data_H = txt_to_axislists('anntena_measurements/LAB2_H.TXT', 7, 71)
-    # graph(data_H, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
-    # graph_polar(data_H, True, "Zależność mocy od kąta", False)
+    graph(data_H, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
+    graph_polar(data_H, True, "Zależność mocy od kąta", False)
 
-    graph_polar(data_H, False, "Zależność skali decybelowej natężenia pola", True)
+    graph_polar(data_H, False, "Zależność w skali decybelowej natężenia pola", True)
+    graph(data_H, 'kąt [°]', '', False, 'Zależność w skali decybelowej natężenia pola', True)
 
     graph_polar(data_H, True, "Zależność w skali liniowej natężenia pola", True)
+    graph(data_H, 'kąt [°]', '', True, 'Zależność w skali liniowej natężenia pola', True)
