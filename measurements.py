@@ -51,9 +51,12 @@ def txt_to_axislists(file_name, fromx, tox):
     return x, y
 
 
+
+
 def graph(axislists, xlabel, ylabel, ifNotDB, title):
     x = axislists[0]
     y = axislists[1]
+
 
     # standarization of data
     if ifNotDB:
@@ -105,10 +108,11 @@ def graph_polar(axislist, ifNotDB, title):
 
 if __name__ == '__main__':
     # 7-71, because in the rest of measurement antenna is not moving
-    data_E = txt_to_axislists('LAB2_E.TXT', 7, 71)
+    data_E = txt_to_axislists('anntena_measurements/LAB2_E.TXT', 7, 71)
     graph(data_E, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta')
     graph_polar(data_E, True, "Zależność mocy od kąta")
 
-    data_H = txt_to_axislists('LAB2_H.TXT', 7, 71)
+    data_H = txt_to_axislists('anntena_measurements/LAB2_H.TXT', 7, 71)
     graph(data_H, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta')
     graph_polar(data_H, True, "Zależność mocy od kąta")
+
