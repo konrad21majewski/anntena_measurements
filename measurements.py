@@ -49,22 +49,32 @@ def txt_to_axislists(file_name, fromx, tox):
                 if fromx < data_x < tox:
                     x.append(data_x)
                     y.append(data_y)
-    return x, y
+    return x, y #axislist
 
 
 
 
-def graph(axislists, xlabel, ylabel, ifNotDB, title):
+def graph(axislists, xlabel, ylabel, ifNotDB, title, ifSqrt):
     x = axislists[0]
     y = axislists[1]
 
     # standarization of data
     if ifNotDB:
         y = [dbm_to_mw(i) for i in y]  # converts elements of x list to mW
-        y = standardize_1(y)
+        if ifSqrt:
+            y = standardize_1(y)
+            for i in range(len(y)):
+                y[i] = math.sqrt(y[i])
+        else:
+            y = standardize_1(y)
 
     if not ifNotDB:
-        y = standardize_neg30_to_0(y)
+        if ifSqrt:
+            y = standardize_neg30_to_0(y)
+            for i in range(len(y)):
+                y[i] = -math.sqrt(-y[i])
+        else:
+            y = standardize_neg30_to_0(y)
 
     x = standardize_180(x)
 
@@ -77,17 +87,27 @@ def graph(axislists, xlabel, ylabel, ifNotDB, title):
     plt.show()
 
 
-def graph_polar(axislist, ifNotDB, title):
+def graph_polar(axislist, ifNotDB, title, ifSqrt):
     x = np.radians(axislist[0])
     y = axislist[1]
 
     if ifNotDB:
         y = [dbm_to_mw(i) for i in y]  # converts elements of x list to mW
-        y = standardize_1(y)
+        if ifSqrt:
+            y = standardize_1(y)
+            for i in range(len(y)):
+                y[i] = math.sqrt(y[i])
+        else:
+            y = standardize_1(y)
 
     if not ifNotDB:
-        y = standardize_1(y)
-        y = standardize_neg30_to_0(y)
+        if ifSqrt:
+            y = standardize_neg30_to_0(y)
+            for i in range(len(y)):
+                y[i] = -math.sqrt(-y[i])
+        else:
+            y = standardize_neg30_to_0(y)
+
 
     x = standardize_180(x)
     x = np.radians(x)
@@ -108,10 +128,19 @@ def graph_polar(axislist, ifNotDB, title):
 if __name__ == '__main__':
     # 7-71, because in the rest of measurement antenna is not moving
     data_E = txt_to_axislists('anntena_measurements/LAB2_E.TXT', 7, 71)
-    graph(data_E, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta')
-    graph_polar(data_E, True, "Zależność mocy od kąta")
+    # graph(data_E, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
+    # graph_polar(data_E, True, "Zależność mocy od kąta", False)
+
+    # graph_polar(data_E, False, "Zależność skali decybelowej natężenia pola", True)
+    #
+    # graph_polar(data_E, True, "Zależność w skali liniowej natężenia pola", True)
+
+
 
     data_H = txt_to_axislists('anntena_measurements/LAB2_H.TXT', 7, 71)
-    graph(data_H, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta')
-    graph_polar(data_H, True, "Zależność mocy od kąta")
+    # graph(data_H, 'kąt [°]', 'moc', True, 'Zależność mocy od kąta', False)
+    # graph_polar(data_H, True, "Zależność mocy od kąta", False)
 
+    graph_polar(data_H, False, "Zależność skali decybelowej natężenia pola", True)
+
+    graph_polar(data_H, True, "Zależność w skali liniowej natężenia pola", True)
