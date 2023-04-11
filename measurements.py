@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -57,14 +58,12 @@ def graph(axislists, xlabel, ylabel, ifNotDB, title):
     x = axislists[0]
     y = axislists[1]
 
-
     # standarization of data
     if ifNotDB:
         y = [dbm_to_mw(i) for i in y]  # converts elements of x list to mW
         y = standardize_1(y)
 
     if not ifNotDB:
-        y = standardize_1(y)
         y = standardize_neg30_to_0(y)
 
     x = standardize_180(x)
